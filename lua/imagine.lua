@@ -68,7 +68,7 @@ M.setup = function()
 
         -- TODO: Get image_dimensions of image being displayed
         local image_dimensions = { width = 200, height = 400 }
-        -- Saving terminal outout
+        -- Saving terminal output
         -- redir @a | echo "This will end up in register a." | redir END
 
         local w_image_dimensions_off = math.ceil(image_dimensions.width / column_px)
