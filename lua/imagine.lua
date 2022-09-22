@@ -27,7 +27,7 @@ M.setup = function()
   })
 
   --[[
-   TODO: Turn job into a opteration
+   TODO: Turn job into a operation
     example:
 
     job = viewer:request({
@@ -52,7 +52,7 @@ M.setup = function()
   vim.api.nvim_create_autocmd("BufWinEnter", {
     callback = function()
       -- TODO: Better way of detecting images
-      if vim.fn.expand("%:e") == "png" then
+      if vim.fn.expand("%:e") == "png" or "jpg" then
         -- Get path of image, and esacpe spaces
         -- TODO: Better way of getting file path
         local path = tostring(vim.fn.getbufinfo("%")[1].name):gsub(" ", "\\ ")
@@ -60,14 +60,22 @@ M.setup = function()
         local width = vim.api.nvim_win_get_width(current_window)
         local height = vim.api.nvim_win_get_height(current_window)
 
-        -- TODO: Get image_dimensions using 'file' command
-        -- local image_dimensions = { width = 200, height = 200 }
+        -- TODO: Center image
+        -- TODO: Translate image -50% of its width and height ( I have no idea how Im going to do this )
+        -- Assume column width and row height in px
+        local column_px = 15
+        local row_px = 60
 
-        -- TODO: Translate image -50% of its width and height ( I have no idea how Im going to do this)
-        local x = math.floor(width / 2)
-        local y = math.floor(height / 2)
-
+        -- TODO: Get image_dimensions of image being displayed
+        local image_dimensions = { width = 200, height = 400 }
+        -- Saving terminal outout
         -- redir @a | echo "This will end up in register a." | redir END
+
+        local w_image_dimensions_off = math.ceil(image_dimensions.width / column_px)
+        local h_image_dimensions_off = math.ceil(image_dimensions.height / row_px)
+
+        local x = math.ceil(width / 2) - w_image_dimensions_off
+        local y = math.ceil(height / 2) - h_image_dimensions_off
 
         local job = viewer:request({ "~/plugins/imagine.nvim/ueberzug.sh", path, width, height, x, y })
 
