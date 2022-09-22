@@ -26,11 +26,35 @@ M.setup = function()
     group = image_group,
   })
 
+  --[[
+   TODO: Turn job into a opteration
+    example:
+
+    job = viewer:request({
+      image_path = "path/to/image",
+      image_x = 0,
+      image_y = 0,
+      image_width = 10,
+      image_height = 20,
+    })
+
+    viewer:start(job)
+  ]]
+
+  --[[
+   TODO: Redraw function
+    example:
+
+    local job = jobs:fetch_job_id()
+    viewer:redraw(job)
+  ]]
+
   vim.api.nvim_create_autocmd("BufWinEnter", {
     callback = function()
       -- TODO: Better way of detecting images
       if vim.fn.expand("%:e") == "png" then
         -- Get path of image, and esacpe spaces
+        -- TODO: Better way of getting file path
         local path = tostring(vim.fn.getbufinfo("%")[1].name):gsub(" ", "\\ ")
 
         local width = vim.api.nvim_win_get_width(current_window)
@@ -39,7 +63,7 @@ M.setup = function()
         -- TODO: Get image_dimensions using 'file' command
         -- local image_dimensions = { width = 200, height = 200 }
 
-        -- TODO: Translate image -50% of its width and height
+        -- TODO: Translate image -50% of its width and height ( I have no idea how Im going to do this)
         local x = math.floor(width / 2)
         local y = math.floor(height / 2)
 
