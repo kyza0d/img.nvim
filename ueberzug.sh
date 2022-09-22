@@ -13,9 +13,9 @@
 ueberzug layer --parser bash 0< <(
 while "true" 
   do
-    declare -Ap add_command=([action]="add" [identifier]="example0" [x]="0" [y]="0" [path]=~/plugins/imagine.nvim/images/200\ x\ 200.png)
+    declare -Ap add_command=([action]="add" [identifier]="example0" [scaler]="crop" [synchronously_draw]=true [path]="${1}" [width]="${2}" [height]="${3}" [x]="${4}" [y]="${5}" )
 
-    sleep 1
+    sleep 0.1
   done
 
   # declare -Ap remove_command=([action]="remove" [identifier]="example0") # Remove image
