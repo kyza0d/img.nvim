@@ -19,7 +19,7 @@ M.setup = function()
     callback = function()
       -- Remove image from buffers with running jobs
       if vim.b.job_id then
-        local job = jobs:fetch_job_id(vim.b.job_id)
+        local job = jobs:fetch_job_id()
         jobs:kill(job)
       end
     end,

@@ -50,19 +50,15 @@ end
 -- Stops a running job
 -- @param job_id unique id, and vim.b.job_id
 function jobs:kill(job_id)
-  -- TODO: simplify nesting
-  local job = job_id.job_id
+  local job = job_id
   vim.fn.jobstop(jobs[job].job_spec)
 end
 
 -- Fetches returns job from jobs table
--- @param job_id unique indetifier, and vim.b.job_id
-function jobs:fetch_job_id(buffer)
-  buffer = vim.b.job_id
-  local job_id = buffer
-  return {
-    job_id = job_id,
-  }
+-- @return buffer-specific job id
+function jobs:fetch_job_id()
+  local job_id = vim.b.job_id
+  return job_id
 end
 
 return { viewer = viewer, jobs = jobs }
