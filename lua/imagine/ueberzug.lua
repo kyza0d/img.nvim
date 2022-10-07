@@ -1,13 +1,13 @@
 local utils = require("imagine.utils")
 
 -- Provides functions for working with images
--- @module viewer
-local viewer = {}
+-- @module ueberzug
+local ueberzug = {}
 
 -- When calling request, a set of instructions should be provided for ueberzug
 -- @param job_spec a table of arguments given to ueberzug
 -- @param job_id a unique id for referencing jobs
-function viewer:request(job_spec, job_id)
+function ueberzug:request(job_spec, job_id)
   -- Check if the current buffer has a buffer variable, if so then assign job_id to the buffer variable
   if vim.b.job_id ~= nil then
     goto continue
@@ -43,7 +43,7 @@ end
 
 -- Start a background job
 -- @param job starts a job
-function viewer:job_start(job)
+function ueberzug:job_start(job)
   jobs:register(utils.concat(job.job_spec, " "), job.job_id)
 end
 
@@ -61,4 +61,4 @@ function jobs:fetch_job_id()
   return job_id
 end
 
-return { viewer = viewer, jobs = jobs }
+return { ueberzug = ueberzug, jobs = jobs }
