@@ -1,4 +1,4 @@
-local utils = require("imagine.utils")
+local utils = require("img.utils")
 
 -- Provides functions for working with images
 -- @module ueberzug
